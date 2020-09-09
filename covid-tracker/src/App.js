@@ -6,15 +6,15 @@ import { Button } from 'react-bootstrap'
 
 
 firebase.initializeApp({
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: process.env.REACT_APP_API_KEY, //hid firebase api
   authDomain:"covid-tracker-auth.firebaseapp.com"
 })
 
 
 class App extends Component {
   state={isSignedIn: false}
-  uiConfig = {
-    signInFlow: "popup",
+  uiConfig = { //ui for google and facebook login
+    signInFlow: "popup", //sign in through pop up window
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID
@@ -35,7 +35,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Covid-Tracker</h1>
-        {this.state.isSignedIn ? (
+        {this.state.isSignedIn ? (  
           <span>
           <div>Signed In!</div>
           <Button onClick={()=>firebase.auth().signOut()}>Sign Out!</Button>
