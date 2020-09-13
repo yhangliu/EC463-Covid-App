@@ -1,7 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './bulogo.ico';
 import './App.css';
 
+
+async function get_data() {
+    const url ="https://api.covidtracking.com/v1/states/MA/current.json?state=MA";
+    const response = await fetch(url);
+    const data = await response.json();
+    //this.setState({date:data.date});
+    console.log(data.lastUpdateEt);
+}
+get_data();
 function App() {
   return (
     <div className="App">
@@ -16,7 +25,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+        Learn React
         </a>
       </header>
     </div>
