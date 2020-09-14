@@ -108,11 +108,32 @@ export default class Survey extends React.Component {
 
     writeSymptomsDataOnce() {
         const {symptomsName} = this.state;
-        let i;
-        for(i = 0; i < symptomsName.length; i++) {
-            firebase.database().ref('symptoms/' + i).set({
-                symptom_name: symptomsName[i]
-            })
+        firebase.database().ref('symptoms').once('value', function(snapshot) {
+            if (!snapshot.exists()) {
+                for(let i = 0; i < symptomsName.length; i++) {
+                    firebase.database().ref('symptoms/' + i).set({symptom_name: symptomsName[i]});
+                }
+                console.log("symptoms created");
+            }
+        });  
+    }
+
+    writeUserSymptoms() {
+        const {symptomsID} = this.state;
+        if (symptomsID.length === 0) {
+            firebase.database().ref("user_symptoms/").push({
+                user_id: firebase.auth().currentUser.uid,
+                symptom: null,
+                date: new Date().toDateString()
+            });
+        } else {
+            for(let i = 0; i <symptomsID.length; i++) {
+                firebase.database().ref("user_symptoms/").push({
+                    user_id: firebase.auth().currentUser.uid,
+                    symptom: symptomsID[i],
+                    date: new Date().toDateString()
+                })
+            }
         }
     }
 
@@ -132,11 +153,11 @@ export default class Survey extends React.Component {
             } else {
                 message = "Please contact your local hospital for help"
             }
-            return (
+            return ( 
                 <div>
                     <h1> {message}  ids {this.state.symptomsID} score {score} </h1>
 
-                    <button onClick={() => this.writeSymptomsDataOnce()}>Back to Home</button>
+                    <button onClick={() => this.writeUserSymptoms()}>Back to Home</button>
 
                 </div>
             )
