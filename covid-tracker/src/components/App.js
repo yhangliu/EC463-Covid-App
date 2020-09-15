@@ -5,6 +5,7 @@ import "../css/App.css";
 import firebase from "firebase";
 import { getData } from '../api';
 import Info from '../components/Stats/Info';
+import logo from '../bulogo.ico';
 
 
 firebase.initializeApp({
@@ -56,6 +57,7 @@ export default class App extends Component {
               firebaseAuth={firebase.auth()}
             />
                 )}
+            <img src={logo} className="App-logo" alt="logo" />
       </div>
     );
   }
