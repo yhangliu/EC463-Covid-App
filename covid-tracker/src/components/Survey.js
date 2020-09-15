@@ -14,7 +14,7 @@ export default class Survey extends React.Component {
             surveyEnd: false, //True if it's the last question
             score: 0,      //the Score
             disabled: true, // cant go next until answer is selected
-            symptomsID: [],
+            symptoms: [],
             symptomsName: ["fever", "cough", "difficulty-breathing", "sore-throat", "loss-of-senses", "vomit/diaherra", "fatigue/nausea", "muscle-aches", "congestion/runny-nose"]
 
         }
@@ -32,19 +32,19 @@ export default class Survey extends React.Component {
     }
 
     nextQuestionHandler = () => {
-        const { userAnswer, answer, score, symptomsID, currentIndex } = this.state
+        const { userAnswer, answer, score, symptoms, currentIndex } = this.state
 
         if (userAnswer === answer) {
             this.setState({
                 score: score + 1
-            })
+            });
           //  console.log(score)
         }
         else {
-            symptomsID.push(SurveyData[currentIndex].id);
-            this.setState({
-                symptomsID
-            })
+            symptoms.push(SurveyData[currentIndex].symptom);
+            this.setState({ 
+                symptoms
+            });
            // console.log(score)
         }
 
@@ -52,7 +52,7 @@ export default class Survey extends React.Component {
             currentIndex: this.state.currentIndex + 1,
             disabled: true,
             userAnswer: null
-        })
+        });
 
     }
 
@@ -64,7 +64,7 @@ export default class Survey extends React.Component {
         this.setState({
             userAnswer: answer,
             disabled: false
-        })
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -81,11 +81,11 @@ export default class Survey extends React.Component {
     }
 
     finishHandler = () => {
-        const { symptomsID, currentIndex, userAnswer, answer, score } = this.state;
+        const { symptoms, currentIndex, userAnswer, answer, score } = this.state;
         let newScore = score;
         if (currentIndex === SurveyData.length - 1) {
             if (userAnswer !== answer) {
-                symptomsID.push(SurveyData[currentIndex].id);
+                symptoms.push(SurveyData[currentIndex].symptom);
               //  console.log(score)
             } else {
                 newScore = score + 1;
@@ -93,27 +93,38 @@ export default class Survey extends React.Component {
             }
             this.setState({
                 surveyEnd: true,
-                symptomsID,
+                symptoms,
                 score: newScore
             })
         }
 
     }
 
-    writeUserData() {
-        firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
-            full_name: firebase.auth().currentUser.displayName
-        })
-    }
+    // writeSymptomsDataOnce() {
+    //     const {symptomsName} = this.state;
+    //     firebase.database().ref('symptoms').once('value', function(snapshot) {
+    //         if (!snapshot.exists()) {
+    //             for(let i = 0; i < symptomsName.length; i++) {
+    //                 firebase.database().ref('symptoms/' + i).set({symptom_name: symptomsName[i]});
+    //             }
+    //             console.log("symptoms created");
+    //         }
+    //     });  
+    // }
 
-    writeSymptomsDataOnce() {
-        const {symptomsName} = this.state;
-        let i;
-        for(i = 0; i < symptomsName.length; i++) {
-            firebase.database().ref('symptoms/' + i).set({
-                symptom_name: symptomsName[i]
-            })
+    writeUserSymptoms() {
+        const {symptoms} = this.state;
+        let date = {
+            last_submitted: Date(Date.now())
         }
+        firebase.database().ref("user_symptoms/").push({
+            user_id: firebase.auth().currentUser.uid,
+            symptoms: symptoms,
+            date_submitted: date.last_submitted,
+            name: firebase.auth().currentUser.displayName
+        });
+
+        firebase.database().ref('users').child(firebase.auth().currentUser.uid).update(date);
     }
 
     
@@ -132,11 +143,11 @@ export default class Survey extends React.Component {
             } else {
                 message = "Please contact your local hospital for help"
             }
-            return (
+            return ( 
                 <div>
-                    <h1> {message}  ids {this.state.symptomsID} score {score} </h1>
+                    <h1> {message}  ids {this.state.symptoms} score {score} </h1>
 
-                    <button onClick={() => this.writeSymptomsDataOnce()}>Back to Home</button>
+                    <button onClick={() => {this.writeUserSymptoms(); this.props.submit();}}>Back to Home</button>
 
                 </div>
             )
