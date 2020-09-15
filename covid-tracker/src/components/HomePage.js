@@ -3,18 +3,28 @@ import Survey from "./Survey.js";
 import { Button, Figure } from "react-bootstrap";
 import firebase from "firebase";
 import Dashboard from "./Dashboard.js"
+import { getData } from '../api';
+import Info from '../components/Stats/Info';
 
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+      this.state = { 
+          data: {},
       showSurvey: false,
       showDashboard: false,
       showWelcome: true 
     };
-
+    this.apiCall();
     this.writeUserData();
-  }
+    }
+
+    async apiCall() {
+        const gotData = await getData();
+        console.log('check1', gotData.death);
+        this.setState({ data: gotData })
+        console.log('check2', this.state.data.death);
+    }
 
   writeUserData() {
     firebase.database().ref('users/' + firebase.auth().currentUser.uid).once("value", snapshot => {
@@ -27,14 +37,16 @@ export default class HomePage extends React.Component {
     })
   }
 
-  render() {
+    render() {
+        const { data } = this.state;
     const {showDashboard, showSurvey, showWelcome} = this.state;
     let welcomePage = (<span>
       <div>Signed In!</div>
       <Button onClick={() => firebase.auth().signOut()}>Sign Out!</Button>
       <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
       <button onClick={() => this.setState({ showSurvey: true, showWelcome: false})}>Track Your Symptoms</button>
-      <button onClick ={() => this.setState({ showDashboard: true, showWelcome: false})}>Admin Dashboard</button>
+        <button onClick={() => this.setState({ showDashboard: true, showWelcome: false })}>Admin Dashboard</button>
+        <Info data={data} />
     </span>);
 
     let surveyPage = (<Survey showSurvey={this.state.showSurvey} submit={() => this.setState({ showSurvey: false, showWelcome: true})} />);
@@ -53,7 +65,7 @@ export default class HomePage extends React.Component {
 
     return (
       <div className="homePage">
-       {display}
+            {display}
       </div>
     );
   }
