@@ -5,6 +5,7 @@ import "../css/App.css";
 import firebase from "firebase";
 import { getData } from '../api';
 import Info from '../components/Stats/Info';
+import logo from '../bulogo.ico';
 
 
 firebase.initializeApp({
@@ -17,12 +18,14 @@ firebase.initializeApp({
 });
 
 
+
+
 export default class App extends Component {
   constructor(props) {
       super(props);
 
       this.state = {
-          isSignedIn: false, showSurvey: false, data: {} };
+          isSignedIn: false, showSurvey: false };
     this.uiConfig = {
       //ui for google and facebook login
       signInFlow: "popup", //sign in through pop up window
@@ -34,14 +37,6 @@ export default class App extends Component {
         signInSuccess: () => false
       }
       };
-      this.apiCall();
-    }
-
-    async apiCall() {
-        const gotData = await getData();
-        console.log('check1', gotData.death);
-        this.setState({ data: gotData })
-        console.log('check2', this.state.data.death);
     }
 
     async componentDidMount () {
@@ -51,8 +46,6 @@ export default class App extends Component {
   };
 
     render() {
-        const { data } = this.state;
-        console.log('check3', data.death);
     return (
       <div className="App">
         <h1>Covid-Tracker</h1>
@@ -64,7 +57,7 @@ export default class App extends Component {
               firebaseAuth={firebase.auth()}
             />
                 )}
-            <Info data  = {data} />
+            <img src={logo} className="App-logo" alt="logo" />
       </div>
     );
   }
