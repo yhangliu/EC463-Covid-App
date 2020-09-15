@@ -1,6 +1,6 @@
 import React from "react";
 import Survey from "./Survey.js";
-import { Button } from "react-bootstrap";
+import { Button, Figure } from "react-bootstrap";
 import firebase from "firebase";
 import Dashboard from "./Dashboard.js"
 
@@ -12,6 +12,19 @@ export default class HomePage extends React.Component {
       showDashboard: false,
       showWelcome: true 
     };
+
+    this.writeUserData();
+  }
+
+  writeUserData() {
+    firebase.database().ref('users/' + firebase.auth().currentUser.uid).once("value", snapshot => {
+      if(!snapshot.exists()){
+        firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
+          full_name: firebase.auth().currentUser.displayName,
+          last_submitted: ''
+        });
+      }
+    })
   }
 
   render() {
