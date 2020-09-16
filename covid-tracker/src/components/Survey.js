@@ -15,8 +15,6 @@ export default class Survey extends React.Component {
             score: 0,      //the Score
             disabled: true, // cant go next until answer is selected
             symptoms: [],
-            symptomsName: ["fever", "cough", "difficulty-breathing", "sore-throat", "loss-of-senses", "vomit/diaherra", "fatigue/nausea", "muscle-aches", "congestion/runny-nose"]
-
         }
     }
 
@@ -137,11 +135,11 @@ export default class Survey extends React.Component {
         if (surveyEnd) {
             let message;
             if (score === 9) {
-                message = "You have no symptoms! Continue practicing social distancing"
+                message = "You have no symptoms! Continue practicing social distancing."
             } else if (score > 6 && score < 9) {
-                message = "You are advised to quarentine for 14 days"
+                message = "You are advised to quarantine for 14 days."
             } else {
-                message = "Please contact your local hospital for help"
+                message = "Please contact your local hospital for help."
             }
             return ( 
                 <div>

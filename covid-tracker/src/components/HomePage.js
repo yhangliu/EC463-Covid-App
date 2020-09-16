@@ -37,6 +37,15 @@ export default class HomePage extends React.Component {
     })
   }
 
+  adminPrompt () {
+    let admin = prompt("Please enter Admin Key");
+    if (admin === process.env.REACT_APP_ADMIN_KEY) {
+      this.setState({ showDashboard: true, showWelcome: false })
+    } else {
+      alert("You do not have permission to access this");
+    }
+  }
+
     render() {
         const { data } = this.state;
     const {showDashboard, showSurvey, showWelcome} = this.state;
@@ -45,7 +54,7 @@ export default class HomePage extends React.Component {
       <Button onClick={() => firebase.auth().signOut()}>Sign Out!</Button>
       <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
       <button onClick={() => this.setState({ showSurvey: true, showWelcome: false})}>Track Your Symptoms</button>
-        <button onClick={() => this.setState({ showDashboard: true, showWelcome: false })}>Admin Dashboard</button>
+        <button onClick={() => this.adminPrompt()}>Admin Dashboard</button>
         <Info data={data} />
     </span>);
 
