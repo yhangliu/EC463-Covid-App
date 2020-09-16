@@ -6,6 +6,7 @@ import firebase from "firebase";
 import { getData } from '../api';
 import Info from '../components/Stats/Info';
 import logo from '../bulogo.ico';
+import bucampus from '../bucampus.jpg';
 
 
 firebase.initializeApp({
@@ -16,7 +17,6 @@ firebase.initializeApp({
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 });
-
 
 
 
@@ -39,6 +39,8 @@ export default class App extends Component {
       };
     }
 
+
+
     async componentDidMount () {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user });
@@ -47,7 +49,7 @@ export default class App extends Component {
 
     render() {
     return (
-      <div className="App">
+        <div className="App">
         <h1>Covid-Tracker</h1>
         {this.state.isSignedIn ? (
           <HomePage/>
@@ -57,7 +59,7 @@ export default class App extends Component {
               firebaseAuth={firebase.auth()}
             />
                 )}
-            <img src={logo} className="App-logo" alt="logo" />
+            <img src={bucampus} className="App-logo" alt="logo" />
       </div>
     );
   }

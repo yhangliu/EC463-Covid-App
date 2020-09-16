@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './bulogo.ico';
 import './App.css';
+import './bucampus.jpg'
 
 
 async function get_data() {
@@ -13,7 +14,7 @@ async function get_data() {
 get_data();
 function App() {
   return (
-    <div className="App">
+      <div className="App" styles={{ backgroundImage: 'url(${bucampus})' }}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
