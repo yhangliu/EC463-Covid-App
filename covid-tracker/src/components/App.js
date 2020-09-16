@@ -20,6 +20,11 @@ firebase.initializeApp({
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b10c4914e21bc84b511779a430df95b0f7e0d36d
 export default class App extends Component {
   constructor(props) {
       super(props);
