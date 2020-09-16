@@ -15,8 +15,6 @@ export default class Survey extends React.Component {
             score: 0,      //the Score
             disabled: true, // cant go next until answer is selected
             symptoms: [],
-            symptomsName: ["fever", "cough", "difficulty-breathing", "sore-throat", "loss-of-senses", "vomit/diaherra", "fatigue/nausea", "muscle-aches", "congestion/runny-nose"]
-
         }
     }
 
