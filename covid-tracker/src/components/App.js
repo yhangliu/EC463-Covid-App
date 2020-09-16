@@ -9,13 +9,14 @@ import logo from '../bulogo.ico';
 
 
 firebase.initializeApp({
-    apiKey: 'AIzaSyAociAV4aHrPmX-5A6aBq5oFZBHJLtRtME', //hid firebase api
-    authDomain: 'covid-tracker-auth.firebaseapp.com',
-    databaseURL: 'https://covid-tracker-auth.firebaseio.com',
-    projectId: 'covid-tracker-auth',
-    storageBucket: 'gs://covid-tracker-auth.appspot.com',
-    messagingSenderId: '538414367722'
+    apiKey: process.env.REACT_APP_API_KEY, //hid firebase api
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 });
+
 
 
 
