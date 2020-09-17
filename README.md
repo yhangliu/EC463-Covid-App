@@ -25,6 +25,9 @@ The user then is presented three buttons. One to sign out, one to "Track your Sy
 The user can only access the Admin Dashboard if they have the admin key(which they will be prompted for). Admin Dashboard provides a list of users who have logged onto the website and displays the date of the last time each user had submitted a survey. It also provides the total number of each symptom experienced by all users within the past 24 hours.
 (Done by using libraries provided by Firebase to read and query information in the database)
 
+Our website has been deploy using Firebase-provided tools, and can be seen here: https://covid-tracker-auth.web.app/
+*this web application was not developed/optimized for mobile use
+
 ----------------------------------------------------------------------
 
 
@@ -73,11 +76,12 @@ We chose to make a web application as we both made a mobile application for EC32
 ----------------------------------------------------------------------
 
 
-# Api choice - https://api.covidtracking.com/v1/states/MA/current.json?state=MA
+# Api choice - https://covidtracking.com/data/api
 
-We really liked this site since it showed the stats for each individual state while still providing detailed information for both daily stats and overall. Most of the other ones that we found
-seemed to either be sorted by country or didn't provide enough information.
+We really liked this site since it showed the stats for each individual state while still providing detailed information for both daily stats and overall. Most of the other ones that we found seemed to either be sorted by country or didn't provide enough information.
 The most important info that we focused on was getting the daily stats, then we focused on getting the overall stats.
+
+State we used: https://api.covidtracking.com/v1/states/MA/current.json?state=MA
 
 ----------------------------------------------------------------------
 
