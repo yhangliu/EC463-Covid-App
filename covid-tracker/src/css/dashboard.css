@@ -1,0 +1,17 @@
+.dashpage {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+
+.user-list {
+    width: 48%;
+    margin-left: 2%;
+    float: left;
+}
+
+.daily-symptoms {
+    width: 50%;
+    float: left;
+}
