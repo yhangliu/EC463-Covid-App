@@ -102,3 +102,35 @@ Advised to seek medical assistance if showing multiple symptoms.
 You can see the name of all the users who signed in as well as the last time they submitted their survey. The daily symptoms are also shown.
 
 ----------------------------------------------------------------------
+
+## Testing
+
+Sign in with google - successful
+Sign in with facebook - was working during development but now some people seem to have issues logging in.
+Show correct name on screen - successful
+Sign out - successful
+
+Correct Survey - successful
+Tracking Symptoms (0 symptoms) - successful
+Tracking Symptoms (1-2 symptoms) - successful
+Tracking Symptoms (3 or more symptoms) - successful
+
+Logging into admin dashboard - successful
+Seeing users in admin dashboard - successful
+Seeing first time logins - successful
+Seeing time survey was submitted - successful
+Seeing list of symptoms - successful but the same user can submit the same symptoms multiple times
+Back to home - successful
+
+See users in database - successful
+Seeing user symptoms in database - successful
+Seeing date of submission in database - successful
+
+Successful api call - successful
+Successful card format - successful
+Correct daily update data - successful
+Correct total stats - successful
+
+
+
+----------------------------------------------------------------------
