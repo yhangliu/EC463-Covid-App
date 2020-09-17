@@ -1,12 +1,11 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid } from '@material-ui/core';
-import styles from './Info.module.css';
 
 const Info = (stats) => {
 
     console.log("check4", stats.data.lastUpdateEt);
     return (
-        <div className={styles.container}>
+        <div className="container">
             <Grid container={2} justify="center">
                 <Grid item component={Card}>
                     <CardContent>
