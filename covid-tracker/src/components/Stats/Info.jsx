@@ -3,7 +3,6 @@ import { Card, CardContent, Typography, Grid } from '@material-ui/core';
 
 const Info = (stats) => {
 
-    console.log("check4", stats.data.lastUpdateEt);
     return (
         <div className="container">
             <Grid container={2} justify="center">

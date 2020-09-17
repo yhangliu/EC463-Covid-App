@@ -1,10 +1,7 @@
-.App{
-    text-align: center;
-    font-family: Arial;
-}
 
 .selected {
-    background: yellow !important;
+    background:#e63946 !important;
+    color: white !important;
 }
 
 .options {
@@ -13,7 +10,7 @@
     cursor: pointer;
     width:20%;
     background-color: white;
-    color: steelblue;
+    color: black;
     font-weight: bold;
     margin: auto;
 }
@@ -28,8 +25,18 @@ ul li {
 
 #wrapper{
     justify-content: center;    
-    color:white;
+    color:black;
     font-family: 'Segoe UI',;
     font-size: 18px;
-    background-color: teal;
+    background-color: rgb(228, 228, 228);
+    padding-top: 50px;
+    height: 100%;
+ }
+
+ #title{
+     padding: 5px;
+ }
+
+ #wrapper button {
+     margin: 10px;
  }

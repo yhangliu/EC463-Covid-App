@@ -14,7 +14,7 @@ export default class Survey extends React.Component {
             surveyEnd: false, //True if it's the last question
             score: 0,      //the Score
             disabled: true, // cant go next until answer is selected
-            symptoms: [],
+            symptoms: [], //store symptoms
         }
     }
 
@@ -29,21 +29,19 @@ export default class Survey extends React.Component {
         })
     }
 
-    nextQuestionHandler = () => {
+    nextQuestionHandler = () => { //checks if question is answered before moving on
         const { userAnswer, answer, score, symptoms, currentIndex } = this.state
 
         if (userAnswer === answer) {
             this.setState({
                 score: score + 1
             });
-          //  console.log(score)
         }
         else {
             symptoms.push(SurveyData[currentIndex].symptom);
-            this.setState({ 
+            this.setState({
                 symptoms
             });
-           // console.log(score)
         }
 
         this.setState({
@@ -58,7 +56,7 @@ export default class Survey extends React.Component {
         this.loadQuiz();
     }
 
-    checkAnswer = answer => {
+    checkAnswer = answer => { //next button disabled if no answer
         this.setState({
             userAnswer: answer,
             disabled: false
@@ -78,16 +76,14 @@ export default class Survey extends React.Component {
         }
     }
 
-    finishHandler = () => {
+    finishHandler = () => { //checks for last question
         const { symptoms, currentIndex, userAnswer, answer, score } = this.state;
         let newScore = score;
         if (currentIndex === SurveyData.length - 1) {
             if (userAnswer !== answer) {
                 symptoms.push(SurveyData[currentIndex].symptom);
-              //  console.log(score)
             } else {
                 newScore = score + 1;
-               // console.log(score)
             }
             this.setState({
                 surveyEnd: true,
@@ -98,20 +94,9 @@ export default class Survey extends React.Component {
 
     }
 
-    // writeSymptomsDataOnce() {
-    //     const {symptomsName} = this.state;
-    //     firebase.database().ref('symptoms').once('value', function(snapshot) {
-    //         if (!snapshot.exists()) {
-    //             for(let i = 0; i < symptomsName.length; i++) {
-    //                 firebase.database().ref('symptoms/' + i).set({symptom_name: symptomsName[i]});
-    //             }
-    //             console.log("symptoms created");
-    //         }
-    //     });  
-    // }
 
-    writeUserSymptoms() {
-        const {symptoms} = this.state;
+    writeUserSymptoms() { //store user's symptoms and submit-date to firebase database
+        const { symptoms } = this.state;
         let date = {
             last_submitted: Date(Date.now())
         }
@@ -125,7 +110,7 @@ export default class Survey extends React.Component {
         firebase.database().ref('users').child(firebase.auth().currentUser.uid).update(date);
     }
 
-    
+
 
 
 
@@ -133,7 +118,7 @@ export default class Survey extends React.Component {
         const { question, options, currentIndex, userAnswer, surveyEnd, score } = this.state
 
         if (surveyEnd) {
-            let message;
+            let message; //display message depending on user's answers
             if (score === 9) {
                 message = "You have no symptoms! Continue practicing social distancing."
             } else if (score > 6 && score < 9) {
@@ -141,44 +126,42 @@ export default class Survey extends React.Component {
             } else {
                 message = "Please contact your local hospital for help."
             }
-            return ( 
+            return (
                 <div>
-                    <h1> {message}  ids {this.state.symptoms} score {score} </h1>
+                    <h3> {message} </h3>
 
-                    <button onClick={() => {this.writeUserSymptoms(); this.props.submit();}}>Back to Home</button>
+                    <button onClick={() => { this.writeUserSymptoms(); this.props.submit(); }}>Back to Home</button>
 
                 </div>
             )
         }
         return (
             <div id="wrapper">
-                    <div id="title">Symptom Tracker</div>
-                    <div>
-                        <h2>{question}</h2>
-                        <span>{`Question ${currentIndex + 1} of ${SurveyData.length}`}</span>
-                        {
-                            options.map(option =>
-                                <p key={option.id} className={`options ${userAnswer === option ? "selected" : null}`}
-                                    onClick={() => this.checkAnswer(option)}
-                                >
-                                    {option}
-                                </p>
-                            )
-                        }
+                <div id="title">Symptoms Survey</div>
+                <div>
+                    <h2>{question}</h2>
+                    <span>{`Question ${currentIndex + 1} of ${SurveyData.length}`}</span>
+                    {
+                        options.map(option => //chooses select color based on user choice
+                            <p key={option.id} className={`options ${userAnswer === option ? "selected" : null}`}
+                                onClick={() => this.checkAnswer(option)}
+                            >
+                                {option}
+                            </p>
+                        )
+                    }
 
-                        {currentIndex < SurveyData.length - 1 &&
-                            <button disabled={this.state.disabled} onClick={this.nextQuestionHandler}>
-                                Next
-            </button>}
+                    {currentIndex < SurveyData.length - 1 &&
+                        <button disabled={this.state.disabled} onClick={this.nextQuestionHandler}>
+                            Next
+                        </button>}
 
-                        {currentIndex === SurveyData.length - 1 &&
-                            <button onClick={this.finishHandler}
-                                disabled={this.state.disabled}>
-                                Finish
-            </button>}
-
-
-                    </div>
+                    {currentIndex === SurveyData.length - 1 &&
+                        <button onClick={this.finishHandler}
+                            disabled={this.state.disabled}>
+                            Finish
+                        </button>}
+                </div>
             </div>
         );
     }

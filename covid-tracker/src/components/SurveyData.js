@@ -1,4 +1,4 @@
-export const SurveyData = [
+export const SurveyData = [ //survey questions
     {
         id: 0,
         question: `Do you have a fever of 100F or feeling unusually hot?`,
