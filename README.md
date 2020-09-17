@@ -24,9 +24,8 @@ The user then is presented three buttons. One to sign out, one to "Track your Sy
 The user can only access the Admin Dashboard if they have the admin key(which they will be prompted for). Admin Dashboard provides a list of users who have logged onto the website and displays the date of the last time each user had submitted a survey. It also provides the total number of each symptom experienced by all users within the past 24 hours.
 (Done by using libraries provided by Firebase to read and query information in the database)
 
-======================================================================
 ----------------------------------------------------------------------
-======================================================================
+
 
 Instructions:
 This web application was created using React and Node.js.
