@@ -1,0 +1,13 @@
+.user-div {
+    height: 86px;
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px 3px 0px 3px;
+    text-align: left;
+    padding: 3px;
+  }
+
+  .user-div:last-child {
+      border-bottom: 3px solid black;
+  }
