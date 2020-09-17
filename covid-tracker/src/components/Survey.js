@@ -152,7 +152,6 @@ export default class Survey extends React.Component {
         }
         return (
             <div id="wrapper">
-                <div id="main">
                     <div id="title">Symptom Tracker</div>
                     <div>
                         <h2>{question}</h2>
@@ -180,7 +179,6 @@ export default class Survey extends React.Component {
 
 
                     </div>
-                </div>
             </div>
         );
     }

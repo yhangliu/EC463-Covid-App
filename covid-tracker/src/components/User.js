@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import "../css/user.css";
 export default class User extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ export default class User extends Component {
         
         return (
             <div className="user-div">
-                <h1>{this.props.fullName}</h1>
+                <h2>{this.props.fullName}</h2>
                 <p>Last Submitted on {this.props.lastSubmitted}</p>
             </div>
         );

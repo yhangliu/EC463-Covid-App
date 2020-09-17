@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "firebase";
 import User from "./User.js";
 import DailySymptom from "./DailySymptom.js";
+import "../css/dashboard.css"
 
 export default class Dashboard extends React.Component {
     constructor(props) {
@@ -74,16 +75,18 @@ export default class Dashboard extends React.Component {
         })
 
         return (
-          <div className = "dashboard">
-                <span>
+          <div className="dashboard">
+                <div className="dashpage">
                     <div className="user-list">
+                        <h1>Recent Users</h1>
                         {users}
                     </div>
                     <div className="daily-symptoms">
+                        <h1>Daily Symptoms</h1>
                         {symptomsToday}
                     </div>
-                    <button onClick={() => this.props.backToHome()}>Back to Home</button>
-                </span>
+                </div>
+                <button onClick={() => this.props.backToHome()}>Back to Home</button>
           </div>
         );
       }
