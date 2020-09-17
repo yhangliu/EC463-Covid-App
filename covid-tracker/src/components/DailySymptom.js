@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../css/dailySymptom.css";
 
 export default class DailySymptom extends Component {
     constructor(props) {

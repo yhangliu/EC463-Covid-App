@@ -3,8 +3,6 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import HomePage from "./HomePage.js";
 import "../css/App.css";
 import firebase from "firebase";
-import { getData } from '../api';
-import Info from '../components/Stats/Info';
 import logo from '../bulogo.ico';
 import bucampus from '../bucampus.jpg';
 
