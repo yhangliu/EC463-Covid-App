@@ -106,8 +106,8 @@ You can see the name of all the users who signed in as well as the last time the
 ## Testing
 
  - Sign in with google - successful 
- - Sign in with facebook - was working during development but now some people seem to have issues logging in.\
- - Show correct name on screen - successful\
+ - Sign in with facebook - was working during development but now some people seem to have issues logging in
+ - Show correct name on screen - successful
  - Sign out - successful
 
  - Correct Survey - successful
@@ -119,7 +119,7 @@ You can see the name of all the users who signed in as well as the last time the
  - Seeing users in admin dashboard - successful
  - Seeing first time logins - successful
  - Seeing time survey was submitted - successful
- - Seeing list of symptoms - successful but the same user can submit the same symptoms multiple times\
+ - Seeing list of symptoms - successful but the same user can submit the same symptoms multiple times
  - Back to home - successful
 
  - See users in database - successful
