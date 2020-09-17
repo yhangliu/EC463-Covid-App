@@ -110,10 +110,12 @@ You can see the name of all the users who signed in as well as the last time the
  - Show correct name on screen - successful
  - Sign out - successful
 
+
  - Correct Survey - successful
  - Tracking Symptoms (0 symptoms) - successful
  - Tracking Symptoms (1-2 symptoms) - successful
  - Tracking Symptoms (3 or more symptoms) - successful
+
 
  - Logging into admin dashboard - successful
  - Seeing users in admin dashboard - successful
@@ -122,9 +124,11 @@ You can see the name of all the users who signed in as well as the last time the
  - Seeing list of symptoms - successful but the same user can submit the same symptoms multiple times
  - Back to home - successful
 
+
  - See users in database - successful
  - Seeing user symptoms in database - successful
  - Seeing date of submission in database - successful
+
 
  - Successful api call - successful
  - Successful card format - successful
