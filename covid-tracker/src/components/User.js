@@ -6,12 +6,12 @@ export default class User extends Component {
         this.state = { };
     }
 
-    render() {
+    render() { //renders list of users 
         
         return (
             <div className="user-div">
                 <h2>{this.props.fullName}</h2>
-                <p>Last Submitted on {this.props.lastSubmitted}</p>
+                <p>Last Submitted on: {this.props.lastSubmitted}</p>
             </div>
         );
     }

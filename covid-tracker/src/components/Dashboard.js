@@ -26,7 +26,7 @@ export default class Dashboard extends React.Component {
       this.readSymptoms();
     }
     
-    async readData() {
+    async readData() { //reads all users in database
         let {usersByLatestSubmit} = this.state;
         await firebase.database().ref('users').orderByChild('last_submitted').once('value', snapshot => {
             snapshot.forEach(function(child) {
@@ -36,13 +36,11 @@ export default class Dashboard extends React.Component {
         this.setState({usersByLatestSubmit});
     }
 
-    async readSymptoms () {
+    async readSymptoms () { //reads all symptoms for every user in the past 24 hours
         let {dailySymptoms} = this.state;
         let temp = [];
         let before24Hours = new Date(Date.now()-(24*60*60*1000));
-        console.log(before24Hours);
         await firebase.database().ref('user_symptoms').orderByChild('date_submitted').startAt(String(before24Hours)).once('value', snapshot => {
-            console.log(snapshot.val());
             snapshot.forEach(function(child) {
                 temp.push(child.val().symptoms);
             })
@@ -52,7 +50,6 @@ export default class Dashboard extends React.Component {
                 temp.splice(i,1);
             }
         }
-        console.log(temp);
 
         for(var i = 0; i < temp.length; i++){
             for(var j = 0; j < temp[i].length; j++){
@@ -60,7 +57,6 @@ export default class Dashboard extends React.Component {
                 dailySymptoms[temp[i][j]] += 1;
             }
         }
-        console.log(dailySymptoms);
         this.setState({dailySymptoms});
     }
 
@@ -83,7 +79,7 @@ export default class Dashboard extends React.Component {
                     </div>
                     <div className="daily-symptoms">
                         <h1>Daily Symptoms</h1>
-                        {symptomsToday}
+                        <div className="symptom-wrapper">{symptomsToday}</div>
                     </div>
                 </div>
                 <button onClick={() => this.props.backToHome()}>Back to Home</button>

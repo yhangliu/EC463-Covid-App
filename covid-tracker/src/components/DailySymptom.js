@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import "../css/dailySymptom.css";
 
 export default class DailySymptom extends Component {
     constructor(props) {
@@ -7,7 +6,7 @@ export default class DailySymptom extends Component {
         this.state = { };
     }
 
-    render() {
+    render() { //renders total of each symptom
         
         return (
             <div className="symptoms-div">
